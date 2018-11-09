@@ -1,6 +1,13 @@
+import db.DB;
+
 import java.util.Scanner;
 
 public class main {
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
     private static void startCheckoutOrder() {
 
     }
@@ -17,8 +24,13 @@ public class main {
         Scanner input = new Scanner(System.in);
         String choice = "-1";
 
+        DB.connect();
+
         while (true) {
-            System.out.println("Choose function: \n 1. Checkout Order. \n 2. Restock Product Inventory. \n 3. View/Update Product \n 0. Exit");
+            System.out.println("Choose function: \n " +
+                    "1. Checkout Order. \n " +
+                    "2. Restock Product Inventory. \n " +
+                    "3. View/Update Product \n 0. Exit");
             System.out.print("Enter your choice: ");
             choice = input.nextLine();
 
