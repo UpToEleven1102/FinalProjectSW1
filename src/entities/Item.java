@@ -1,34 +1,61 @@
 package entities;
 
 public class Item {
-    private static int inventoryQuantity;
-    private static int discountPercent;
+    //static or not????
+    //TODO: add inventory level
+
+    private int id;
+    private int inventoryQuantity;
+    private int discountPercent;
     private String itemName;
     private String description;
     private boolean isAlcohol;
     private double price;
+    private String barCode;
 
-    public Item(String itemName, String description, boolean isAlcohol, double price) {
+    public Item(int id, int inventoryQuantity, int discountPercent, String itemName, String description, boolean isAlcohol, double price, String barCode) {
+        this.id = id;
+        this.inventoryQuantity = inventoryQuantity;
+        this.discountPercent = discountPercent;
         this.itemName = itemName;
         this.description = description;
         this.isAlcohol = isAlcohol;
         this.price = price;
+        this.barCode = barCode;
     }
 
-    public static int getInventoryQuantity() {
+    public Item(int inventoryQuantity, int discountPercent, String itemName, String description, boolean isAlcohol, double price, String barCode) {
+        this.inventoryQuantity = inventoryQuantity;
+        this.discountPercent = discountPercent;
+        this.itemName = itemName;
+        this.description = description;
+        this.isAlcohol = isAlcohol;
+        this.price = price;
+        this.barCode = barCode;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getInventoryQuantity() {
         return inventoryQuantity;
     }
 
-    public static void setInventoryQuantity(int inventoryQuantity) {
-        Item.inventoryQuantity = inventoryQuantity;
+    public void setInventoryQuantity(int inventoryQuantity) {
+        this.inventoryQuantity = inventoryQuantity;
     }
 
-    public static int getDiscountPercent() {
+    public int getDiscountPercent() {
         return discountPercent;
     }
 
-    public static void setDiscountPercent(int discountPercent) {
-        Item.discountPercent = discountPercent;
+    public void setDiscountPercent(int discountPercent) {
+        this.discountPercent = discountPercent;
     }
 
     public String getItemName() {
@@ -61,5 +88,40 @@ public class Item {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getBarCode() {
+        return barCode;
+    }
+
+    public void setBarCode(String barCode) {
+        this.barCode = barCode;
+    }
+
+    public String peek() {
+        return String.format("\tId: %d - Item: %s - Description: %s",
+                this.getId(),
+                this.getItemName(),
+                this.getDescription());
+    }
+
+    public String info() {
+        return String.format("\tItem: %s - Description: %s - Quantity: %d - Original Price: %f - Discount percent: %d - Bar code: %s",
+                this.getItemName(),
+                this.getDescription(),
+                this.getInventoryQuantity(),
+                this.getPrice(),
+                this.getDiscountPercent(),
+                this.getBarCode());
+    }
+
+    @Override
+    public String toString() {
+        return String.format("\tItem: %s - Description: %s - Original Price: %f - Discount percent: %d - Bar code: %s",
+                this.getItemName(),
+                this.getDescription(),
+                this.getPrice(),
+                this.getDiscountPercent(),
+                this.getBarCode());
     }
 }
