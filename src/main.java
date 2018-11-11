@@ -1,13 +1,10 @@
 import db.DB;
-import entities.Item;
 import lib.Utilities;
+import managers.TimerManager;
 import uiInterface.CheckoutInterface;
 import uiInterface.RestockInterface;
 import uiInterface.ViewUpdateInterface;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 public class main {
@@ -18,6 +15,8 @@ public class main {
         //DB config
         DB.connect();
 
+        TimerManager.printDailyReport();
+        TimerManager.printInventoryReport(1);
 
         while (true) {
             Utilities.clearScreen();
@@ -28,14 +27,14 @@ public class main {
             System.out.print("Enter your choice: ");
             choice = input.nextLine();
 
-            switch (Integer.parseInt(choice)) {
-                case 1:
+            switch (choice) {
+                case "1":
                     CheckoutInterface.checkoutOrder(); break;
-                case 2:
+                case "2":
                     RestockInterface.restockInventory(); break;
-                case 3:
+                case "3":
                     ViewUpdateInterface.viewUpdateProduct(); break;
-                case 0: DB.close(); return;
+                case "0": DB.close(); return;
                 default: System.out.println("Wrong input.");
             }
         }

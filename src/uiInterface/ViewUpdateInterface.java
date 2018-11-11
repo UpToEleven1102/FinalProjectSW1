@@ -1,7 +1,7 @@
 package uiInterface;
 
 import db.DB;
-import entities.Item;
+import entities.ItemEntity;
 import lib.Utilities;
 
 import java.util.List;
@@ -12,7 +12,7 @@ public class ViewUpdateInterface {
 
     public static void viewItem(int id) {
         Utilities.clearScreen();
-        Item item = DB.getItemById(id);
+        ItemEntity item = DB.getItemById(id);
         System.out.println(item.info());
         System.out.println("\n(Enter 'update' to edit the item info)");
         System.out.print("\n(Press enter to exit...)");
@@ -22,7 +22,7 @@ public class ViewUpdateInterface {
         }
     }
 
-    public static Item updateItem(Item item) {
+    public static ItemEntity updateItem(ItemEntity item) {
         Utilities.clearScreen();
         System.out.println("Enter new info: ");
         System.out.print("Name (enter empty string to skip):");
@@ -66,9 +66,9 @@ public class ViewUpdateInterface {
     public static void viewUpdateProduct() {
         Utilities.clearScreen();
 
-        List<Item> items = DB.getAllItems();
+        List<ItemEntity> items = DB.getAllItems();
         System.out.println("Select an item to view: ");
-        for (Item item :
+        for (ItemEntity item :
                 items) {
             System.out.println("\t"+item.peek());
         }

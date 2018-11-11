@@ -1,11 +1,10 @@
 package uiInterface;
 
 import db.DB;
-import entities.Item;
+import entities.ItemEntity;
 import lib.Utilities;
 import managers.RestockManager;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,17 +14,17 @@ public class RestockInterface {
 
         Scanner scanner = new Scanner(System.in);
 
-        List<Item> items = DB.getAllItems();
+        List<ItemEntity> items = DB.getAllItems();
 
         System.out.println("Inventory: ");
-        for (Item item :
+        for (ItemEntity item :
                 items) {
             System.out.println(item);
         }
         System.out.print("\nEnter bar code: ");
         String barCode = scanner.nextLine();
 
-        Item item = DB.getItemByBarCode(barCode);
+        ItemEntity item = DB.getItemByBarCode(barCode);
         if (item != null) {
             System.out.println("Item selected: \n\t"+item.info());
             System.out.print("Enter quantity: ");
@@ -34,10 +33,25 @@ public class RestockInterface {
             System.out.println("Item updated: "+item.info());
             scanner.nextLine();
         } else {
-            item = RestockManager.restockNewItem(barCode);
+            System.out.print("Enter item name: ");
+            String name = scanner.nextLine();
+            System.out.print("Description: ");
+            String des = scanner.nextLine();
+            System.out.print("Price: ");
+            double price = Double.parseDouble(scanner.nextLine());
+            System.out.print("Discount percent: ");
+            int discount = Integer.parseInt(scanner.nextLine());
+            System.out.print("Quantity: ");
+            int quantity = Integer.parseInt(scanner.nextLine());
+            System.out.print("Inventory level: ");
+            double inventoryLevel = Double.parseDouble(scanner.nextLine());
+
+            item = new ItemEntity(quantity, discount, name, des, false, price, barCode, inventoryLevel );
+
+            item = RestockManager.restockNewItem(item);
             if (item!= null) {
                 System.out.println("Item inserted: "+item.info());
-            } else System.out.println("Failed to insert item...");
+            } else System.out.println("Failed to newItem item...");
             scanner.nextLine();
         }
     }
