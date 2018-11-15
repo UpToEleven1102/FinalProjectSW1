@@ -18,7 +18,7 @@ public class DB {
     public static Connection connect() {
         if (conn == null)
             try {
-                String uri = "jdbc:sqlite:self_checkout.db";
+                String uri = "jdbc:sqlite:src/db/self_checkout.db";
                 conn = DriverManager.getConnection(uri);
                 System.out.println("Connection to SQLite has been established");
                 createTables();
@@ -94,7 +94,7 @@ public class DB {
 
     public static void seed() {
         List<ItemEntity> items = new ArrayList<>();
-        File file = new File("sample_products.csv");
+        File file = new File("src/db/sample_products.csv");
         try {
             Scanner scanner = new Scanner(file);
             String line;
