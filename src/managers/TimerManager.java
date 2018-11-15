@@ -1,6 +1,7 @@
 package managers;
 
 import db.DB;
+import db.ItemDBService;
 import db.TransactionDBService;
 import entities.ItemEntity;
 import entities.TransactionEntity;
@@ -11,7 +12,7 @@ import java.util.*;
 
 public class TimerManager {
     private static Timer timer = new Timer();
-    private static List<ItemEntity> inventory = DB.getAllItems();
+    private static List<ItemEntity> inventory = ItemDBService.getAllItems();
 
     public static void printDailyReport() {
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -41,7 +42,7 @@ public class TimerManager {
                 }
                 PrinterInterface.printDailyReport(revenue, items);
             }
-        }, 4 * 1000, 30 * 1000);
+        }, 30 * 1000, 60 * 1000);
     }
 
     public static void printInventoryReport(double inventoryLevel) {
@@ -57,7 +58,7 @@ public class TimerManager {
                 }
                 PrinterInterface.printInventoryReport(reportItems);
             }
-        }, 5 * 1000, 30 * 1000);
+        }, 31 * 1000, 60 * 1000);
 
     }
 }

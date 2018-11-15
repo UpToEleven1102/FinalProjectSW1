@@ -1,6 +1,7 @@
 package uiInterface;
 
 import db.DB;
+import db.ItemDBService;
 import entities.ItemEntity;
 import lib.Utilities;
 import managers.CheckoutManager;
@@ -13,7 +14,7 @@ public class CheckoutInterface {
     public static void checkoutOrder() {
         Utilities.clearScreen();
         System.out.println("List of items: ");
-        List<ItemEntity> items = DB.getAllItems();
+        List<ItemEntity> items = ItemDBService.getAllItems();
         List<ItemEntity> cart = new ArrayList<>();
         for (ItemEntity item :
                 items) {

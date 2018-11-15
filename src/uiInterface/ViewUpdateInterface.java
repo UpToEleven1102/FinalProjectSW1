@@ -1,8 +1,10 @@
 package uiInterface;
 
 import db.DB;
+import db.ItemDBService;
 import entities.ItemEntity;
 import lib.Utilities;
+import managers.ViewUpdateManager;
 
 import java.util.List;
 import java.util.Scanner;
@@ -12,7 +14,8 @@ public class ViewUpdateInterface {
 
     public static void viewItem(int id) {
         Utilities.clearScreen();
-        ItemEntity item = DB.getItemById(id);
+
+        ItemEntity item = ViewUpdateManager.viewItem(id);
         System.out.println(item.info());
         System.out.println("\n(Enter 'update' to edit the item info)");
         System.out.print("\n(Press enter to exit...)");
@@ -55,7 +58,7 @@ public class ViewUpdateInterface {
         barCode = barCode.length() ==0? item.getBarCode(): barCode;
         item.setBarCode(barCode);
 
-        DB.updateItem(item);
+        ViewUpdateManager.updateItem(item);
 
         System.out.println("\n"+item.info());
         System.out.println("Item updated...");
@@ -66,7 +69,7 @@ public class ViewUpdateInterface {
     public static void viewUpdateProduct() {
         Utilities.clearScreen();
 
-        List<ItemEntity> items = DB.getAllItems();
+        List<ItemEntity> items = ItemDBService.getAllItems();
         System.out.println("Select an item to view: ");
         for (ItemEntity item :
                 items) {

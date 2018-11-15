@@ -1,6 +1,7 @@
 package managers;
 
 import db.DB;
+import db.ItemDBService;
 import db.TransactionDBService;
 import entities.ItemEntity;
 import lib.Utilities;
@@ -12,7 +13,7 @@ public class CheckoutManager {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void addItemToCart(String barCode, List<ItemEntity> cart) {
-        ItemEntity item = DB.getItemByBarCode(barCode);
+        ItemEntity item = ItemDBService.getItemByBarCode(barCode);
         if (item == null) {
             System.out.println("Wrong bar code");
         } else if (!item.isAlcohol()) {

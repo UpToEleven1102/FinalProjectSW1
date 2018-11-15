@@ -15,8 +15,6 @@ public class PrinterInterface {
                 items) {
             System.out.println("\t" + item.report());
         }
-
-
     }
 
     public static void printInventoryReport(List<ItemEntity> inventory) {

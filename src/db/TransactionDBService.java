@@ -71,7 +71,7 @@ public class TransactionDBService {
             ResultSet rs = stmt.executeQuery("SELECT * from transaction_items WHERE transaction_id='"+transactionId+"';");
             while(rs.next()) {
                 int item_id = rs.getInt("item_id");
-                ItemEntity item = DB.getItemById(item_id);
+                ItemEntity item = ItemDBService.getItemById(item_id);
                 items.add(item);
             }
             stmt.close();
