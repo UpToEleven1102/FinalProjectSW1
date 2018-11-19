@@ -16,9 +16,9 @@ public class TransactionDBService {
     private static Connection conn = DB.connect();
     private static RandomString uuid = new RandomString(10);
 
-    public static void newTransaction(List<ItemEntity> items, double amount) {
+    public static TransactionEntity newTransaction(List<ItemEntity> items, double amount) {
+        String id = uuid.nextString();
         try (Statement stmt = conn.createStatement();) {
-            String id = uuid.nextString();
             LocalDateTime dateTime = LocalDateTime.now();
 
             stmt.execute("INSERT INTO transactions(id,amount,created_date) VALUES ('" + id + "'," + amount + ",'" + dateTime.toString() + "');");
@@ -38,11 +38,36 @@ public class TransactionDBService {
                         +discountAmount + "," +
                         "1);");
             }
-
             stmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return getTransactionById(id);
+    }
+
+    public static TransactionEntity getTransactionById(String id) {
+        TransactionEntity transaction = null;
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM transactions WHERE transactions.id='"+id+"';");
+            if (rs.next()) {
+                double total = rs.getDouble("amount");
+                String createdDate = rs.getString("created_date");
+
+                transaction = new TransactionEntity(id, total, createdDate, new ArrayList<ItemEntity>());
+                rs = stmt.executeQuery("SELECT item_id FROM transaction_items WHERE transaction_id='"+id+"';");
+
+                int itemId;
+                while(rs.next()) {
+                    itemId = rs.getInt("item_id");
+                    transaction.addNewItem(ItemDBService.getItemById(itemId));
+                }
+            }
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return transaction;
     }
 
     public static List<TransactionEntity> getTransactions() {

@@ -1,6 +1,5 @@
-package uiInterface;
+package interfaces;
 
-import db.DB;
 import db.ItemDBService;
 import entities.ItemEntity;
 import lib.Utilities;
@@ -27,11 +26,11 @@ public class CheckoutInterface {
         String barCode = null;
         while (true) {
             System.out.print("\n(Enter 'cancel' to cancel the transaction)" +
-                    "\n(Enter empty input to check out)" +
+                    "\n(Enter 'total' to check out)" +
                     "\nEnter bar code for next item : ");
             barCode = scanner.nextLine();
 
-            if(barCode.equals("")) break;
+            if(barCode.equals("total")) break;
             else if(barCode.equals("cancel")) return;
             CheckoutManager.addItemToCart(barCode, cart);
         }

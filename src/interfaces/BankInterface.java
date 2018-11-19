@@ -1,4 +1,4 @@
-package uiInterface;
+package interfaces;
 
 import java.util.Random;
 

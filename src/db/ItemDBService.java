@@ -139,4 +139,12 @@ public class ItemDBService {
             return null;
         }
     }
+
+    public static void updateInventory(List<ItemEntity> cart) {
+        for (ItemEntity item :
+                cart) {
+            item.setInventoryQuantity(item.getInventoryQuantity() -1);
+            ItemDBService.updateItem(item);
+        }
+    }
 }

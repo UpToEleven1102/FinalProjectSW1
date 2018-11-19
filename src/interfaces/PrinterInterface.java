@@ -1,6 +1,7 @@
-package uiInterface;
+package interfaces;
 
 import entities.ItemEntity;
+import entities.TransactionEntity;
 import lib.Utilities;
 
 import java.util.List;

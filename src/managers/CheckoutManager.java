@@ -1,9 +1,10 @@
 package managers;
 
-import db.DB;
 import db.ItemDBService;
 import db.TransactionDBService;
 import entities.ItemEntity;
+import entities.TransactionEntity;
+import interfaces.ReceiptPrinterInterface;
 import lib.Utilities;
 
 import java.util.List;
@@ -31,17 +32,25 @@ public class CheckoutManager {
         }
     }
 
+    private static double getTotal(List<ItemEntity> cart){
+        double total =0;
+        for (ItemEntity item :
+                cart) {
+            System.out.println("\n" + item);
+            total += item.getPrice();
+        }
+        return total;
+    }
+
     public static void checkout(List<ItemEntity> cart) {
         Utilities.clearScreen();
         double total = 0;
         String result = null;
 
         System.out.println("Cart: ");
-        for (ItemEntity item :
-                cart) {
-            System.out.println("\n" + item);
-            total += item.getPrice();
-        }
+
+        total = getTotal(cart);
+
         System.out.println("Total: " + total);
 
         payment:
@@ -55,7 +64,7 @@ public class CheckoutManager {
 
             switch (select) {
                 case "1":
-                    result = CashierManager.payByDebit(cart, total);
+                    result = CashierManager.payByCard(cart, total);
                     break payment;
                 case "2":
                     result = CashierManager.payByCash(cart, total);
@@ -66,8 +75,12 @@ public class CheckoutManager {
         }
 
         if (result != null) {
-            TransactionDBService.newTransaction(cart, total);
+            TransactionEntity transaction = TransactionDBService.newTransaction(cart, total);
             System.out.println("Thank you for your order!");
+
+            ItemDBService.updateInventory(cart);
+
+            ReceiptPrinterInterface.printReceipt(transaction);
             scanner.nextLine();
         } else {
             System.out.println("Failed to verify payment!");

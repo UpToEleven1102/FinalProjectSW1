@@ -1,9 +1,9 @@
 import db.DB;
 import lib.Utilities;
 import managers.TimerManager;
-import uiInterface.CheckoutInterface;
-import uiInterface.RestockInterface;
-import uiInterface.ViewUpdateInterface;
+import interfaces.CheckoutInterface;
+import interfaces.RestockInterface;
+import interfaces.ViewUpdateInterface;
 
 import java.util.Scanner;
 

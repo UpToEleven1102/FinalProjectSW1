@@ -1,7 +1,7 @@
 package managers;
 
 import entities.ItemEntity;
-import uiInterface.BankInterface;
+import interfaces.BankInterface;
 
 import java.util.List;
 import java.util.Random;
@@ -22,7 +22,7 @@ public class CashierManager {
         return "8899";
     }
 
-    public static String payByDebit(List<ItemEntity> cart, double amount) {
+    public static String payByCard(List<ItemEntity> cart, double amount) {
         System.out.print("Enter card number: ");
         String cardNumber = scanner.nextLine();
         int pin = 0;

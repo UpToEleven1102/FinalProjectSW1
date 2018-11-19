@@ -1,6 +1,5 @@
-package uiInterface;
+package interfaces;
 
-import db.DB;
 import db.ItemDBService;
 import entities.ItemEntity;
 import lib.Utilities;

@@ -1,12 +1,10 @@
 package managers;
 
-import db.DB;
 import db.ItemDBService;
 import db.TransactionDBService;
 import entities.ItemEntity;
 import entities.TransactionEntity;
-import lib.Utilities;
-import uiInterface.PrinterInterface;
+import interfaces.PrinterInterface;
 
 import java.util.*;
 

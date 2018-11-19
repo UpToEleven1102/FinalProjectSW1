@@ -16,6 +16,12 @@ public class TransactionEntity {
         this.items = items;
     }
 
+    public void addNewItem(Object item) {
+        if (item instanceof ItemEntity) {
+            this.items.add((ItemEntity)item);
+        }
+    }
+
     public List<ItemEntity> getItems() {
         return items;
     }
