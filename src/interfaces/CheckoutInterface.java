@@ -25,12 +25,16 @@ public class CheckoutInterface {
         Scanner scanner = new Scanner(System.in);
         String barCode = null;
         while (true) {
-            System.out.print("\n(Enter 'cancel' to cancel the transaction)" +
-                    "\n(Enter 'total' to check out)" +
-                    "\nEnter bar code for next item : ");
+            System.out.print("\nEnter bar code for next item : " +
+                            "\n(Enter 'cancel' to cancel the transaction)" +
+                            "\n(Enter 'total' to check out)" +
+                            "\n(Enter 'sub total' to print current receipt");
             barCode = scanner.nextLine();
 
             if(barCode.equals("total")) break;
+            else if(barCode.equals("sub total")) {
+                CheckoutManager.printSubtotal(cart); break;
+            }
             else if(barCode.equals("cancel")) return;
             CheckoutManager.addItemToCart(barCode, cart);
         }

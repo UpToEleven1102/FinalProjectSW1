@@ -42,6 +42,11 @@ public class CheckoutManager {
         return total;
     }
 
+    public static void printSubtotal(List<ItemEntity> cart) {
+        System.out.println("\n\nTotal: " + getTotal(cart));
+        ReceiptPrinterInterface.printSubTotal(cart);
+    }
+
     public static void checkout(List<ItemEntity> cart) {
         Utilities.clearScreen();
         double total = 0;
