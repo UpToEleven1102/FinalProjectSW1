@@ -1,3 +1,13 @@
+/*
+* The A Team:
+*
+* Huyen Vu
+* Zachary Simpson
+* Isaac Simpson
+* Wenhao Ge
+* */
+
+
 import db.DB;
 import lib.Utilities;
 import managers.TimerManager;

@@ -1,3 +1,12 @@
+/*
+* The A Team:
+*
+* Huyen Vu
+* Zachary Simpson
+* Isaac Simpson
+* Wenhao Ge
+* */
+
 package db;
 
 import entities.ItemEntity;
