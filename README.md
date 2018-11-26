@@ -9,5 +9,5 @@ Java, SQLite - Implementation of a simple client-server system.
 * Wenhao Ge
 
 ##Note: 
-Timer will print reports 30 seconds after the program starts and concurrently do it every minute passes.
+Timer will print reports 30 seconds after the program starts and repeatedly do it every minute passes.
 
